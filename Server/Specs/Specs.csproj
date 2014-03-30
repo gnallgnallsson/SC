@@ -68,7 +68,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SCServer\SCServer.csproj">
+    <ProjectReference Include="..\SCServer\SCServer.csproj">
       <Project>{09b8adfb-8972-4fb7-89d8-c63e723284b0}</Project>
       <Name>SCServer</Name>
     </ProjectReference>
