@@ -1,8 +1,4 @@
 ﻿using SCServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SCServer.Services
 {
@@ -25,7 +21,7 @@ namespace SCServer.Services
         /// <returns>The participant</returns>
         protected virtual Participant ValidateParticipant(Participant participant)
         {
-            participant.IsValid = !(string.IsNullOrEmpty(participant.FirstName) || string.IsNullOrEmpty(participant.LastName));            
+            participant.IsValid = !(string.IsNullOrEmpty(participant.FirstName) || string.IsNullOrEmpty(participant.LastName));
             return participant;
         }
 
@@ -36,13 +32,13 @@ namespace SCServer.Services
         /// <param name="lastName">Last name of the participant</param>
         /// <returns>A participant if the participant is valid, null otherwise</returns>
         protected virtual Participant ValidateAndUpdateParticipantLog(Participant participant)
-        {            
+        {
             participant = this.ValidateParticipant(participant);
             if (participant.IsValid)
             {
                 participant.Status = ParticipantStatus.Enabled;
                 participant.Logs.Add(new ParticipantActivityLog() { Header = "AddParticipant", Body = string.Format("Participant with name {0} {1} is added", participant.FirstName, participant.LastName) });
-            }            
+            }
             else
             {
                 participant.Status = ParticipantStatus.Disabled;
@@ -58,19 +54,9 @@ namespace SCServer.Services
         {
             participant = this.ValidateAndUpdateParticipantLog(participant);
             ParticipantRegistrationResult result = new ParticipantRegistrationResult();
-            result.Participant = participant;            
-            if (participant.IsValid)
-            {
-                // success                                        
-                result.Message = Properties.Resources.SuccedToAddParticipantResultMessage;
-                result.Succeful = true;
-            }
-            else
-            {                
-                result.Message = Properties.Resources.FailedToAddParticipantResultMessage;
-                result.Succeful = false;
-            }
-            
+            result.Participant = participant;
+            result.Message = participant.IsValid ? Properties.Resources.SuccedToAddParticipantResultMessage : Properties.Resources.FailedToAddParticipantResultMessage;
+            result.Succeful = participant.IsValid;
 
             return result;
         }

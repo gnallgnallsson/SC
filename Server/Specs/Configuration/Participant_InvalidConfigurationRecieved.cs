@@ -1,5 +1,5 @@
-﻿using SCServer.Services;
-using SCServer.Models;
+﻿using SCServer.Models;
+using SCServer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
